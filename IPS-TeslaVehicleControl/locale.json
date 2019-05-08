@@ -1,0 +1,25 @@
+{
+  "translations": {
+    "de": {
+      "Wake UP" : "Aufwecken",
+      "Alerts" : "Alarm",
+      "Remote Start Drive" : "Fernstart",
+      "Doors" : "Türen",
+      "Trunk" : "Kofferraum",
+      "Charge Port" : "Ladeport",
+      "Sun Roof" : "Schiebedach",
+      "Charge Control" : "Ladesteuerung",
+      "Charge Limit" : "Ladegrenze",
+      "Climate Auto Conditioning" : "Klimaautomatik",
+      "Driver Temperature" : "Temperatur-Fahrer",
+      "Passenger Temperature" : "Temperatur-Beifahrer",
+      "Set Temperature" : "Temperatur sync. einstellen",
+      "Remote Seat Heater Heater" : "Sitzheizungen",
+      "Remote Seat Heater Level" : "Sitzheizung Stärke",
+      "Set Remote Seat Heater" : "Sitzheizung aktivieren",
+      "Remote Steering Wheel Heater" : "Lenkradheizung",
+      "Media Play Control" : "Medienwiedergabesteuerung",
+      "Media Volume" : "Medienlautstärke"
+    }
+  }
+}
