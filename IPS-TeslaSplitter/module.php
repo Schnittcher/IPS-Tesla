@@ -37,6 +37,8 @@ class TeslaSplitter extends IPSModule
         $this->RegisterAttributeInteger('expires_in', 0);
         $this->RegisterAttributeInteger('AccessTokenExpiresAt', 0);
 
+        $this->RegisterPropertyBoolean('ShowDebugMessages', false);
+
         //Old Login
         $this->RegisterAttributeString('Token', '');
         $this->RegisterAttributeString('TokenExpires', '');
@@ -104,19 +106,24 @@ class TeslaSplitter extends IPSModule
                     foreach ($Vehicles['response'] as $Vehicle) {
                         $selectOptions[$optionsElementCount]['caption'] = $Vehicle['display_name'];
                         $selectOptions[$optionsElementCount]['value'] = strval($Vehicle['id_s']);
-                        $this->SendDebug('Form', $Vehicle['id'], 0);
                         $optionsElementCount++;
                     }
                     $Form['elements'][$FormElementCount]['options'] = $selectOptions;
                 }
             }
         }
+
+        $FormElementCount++;
+        $Form['elements'][$FormElementCount]['type'] = 'CheckBox';
+        $Form['elements'][$FormElementCount]['name'] = 'ShowDebugMessages';
+        $Form['elements'][$FormElementCount]['caption'] = 'Zeige Debug Meldungen';
+
         return json_encode($Form);
     }
 
     public function ForwardData($JSONString)
     {
-        $this->SendDebug(__FUNCTION__, $JSONString, 0);
+        $this->logger(__FUNCTION__, $JSONString);
         $data = json_decode($JSONString);
 
         switch ($data->Buffer->Command) {
@@ -255,10 +262,10 @@ class TeslaSplitter extends IPSModule
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/command/media_volume_down', [], 'POST');
                 break;
             default:
-                $this->SendDebug(__FUNCTION__, $data->Buffer->Command, 0);
+                $this->logger(__FUNCTION__, $data->Buffer->Command);
                 break;
         }
-        $this->SendDebug(__FUNCTION__, json_encode($result), 0);
+        $this->logger(__FUNCTION__, json_encode($result));
         return json_encode($result);
     }
 
@@ -315,9 +322,9 @@ class TeslaSplitter extends IPSModule
         $header = substr($apiResult, 0, $header_len);
         $this->grabCookies($header);
         curl_close($ch);
-        $this->SendDebug('Step 1 URL', $GetUrl, 0);
-        $this->SendDebug('Step 1 Result', $apiResult, 0);
-        $this->SendDebug('Step 1 HederOut', $HederOut, 0);
+        $this->logger('Step 1 URL', $GetUrl);
+        $this->logger('Step 1 Result', $apiResult);
+        $this->logger('Step 1 HederOut', $HederOut);
         $body = substr($apiResult, $header_len);
 
         $dom = new DomDocument();
@@ -358,12 +365,11 @@ class TeslaSplitter extends IPSModule
         ];
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
         $apiResult = curl_exec($ch);
-        $this->SendDebug('Step 2 URL', $GetUrl, 0);
-        $this->SendDebug('Step 2 Result', $apiResult, 0);
-        $this->LogMessage($apiResult, KL_DEBUG);
+        $this->logger('Step 2 URL', $GetUrl);
+        $this->logger('Step 2 Result', $apiResult);
         $header_len = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
         $header = substr($apiResult, 0, $header_len);
-        $this->SendDebug('Step 2 Header', $header, 0);
+        $this->logger('Step 2 Header', $header);
         //$this->grabCookies($header);
         curl_close($ch);
 
@@ -469,7 +475,7 @@ class TeslaSplitter extends IPSModule
         $headerInfo = curl_getinfo($ch);
         $apiResult = json_decode($apiResultJSON, true);
         curl_close($ch);
-        IPS_LogMessage('Refresh', $apiResultJSON);
+        $this->logger(__FUNCTION__, 'API RESULT: '.$apiResultJSON);
         if (is_array($apiResult)) {
             if (array_key_exists('access_token', $apiResult)) {
                 $this->WriteAttributeString('AccessToken', $apiResult['access_token']);
@@ -479,9 +485,7 @@ class TeslaSplitter extends IPSModule
             }
         }
 
-        $this->SendDebug('Tokens', json_encode($apiResult), 0);
-        IPS_LogMessage('Tesla', 'next Token refresh at '.date('H:i:s, d.m', $this->ReadAttributeInteger('AccessTokenExpiresAt')));
-        //IPS_LogMessage('Refresh', print_r($apiResult, true));
+        $this->logger(__FUNCTION__, 'next Token refresh at '.date('H:i:s, d.m', $this->ReadAttributeInteger('AccessTokenExpiresAt')));
         //$this->WriteAttributeString('Token', $apiResult['access_token']);
     }
 
@@ -513,11 +517,10 @@ class TeslaSplitter extends IPSModule
             $this->refreshToken();
             $accessToken = $this->ReadAttributeString('AccessToken');
         }
-
-        IPS_LogMessage('Tesla sendRequest', 'sent at: '.time().' token expires at: '.$tokenExpires.', valid for: '.($tokenExpires-time()));
+        $this->logger(__FUNCTION__, 'sent at: '.time().' token expires at: '.$tokenExpires.', valid for: '.($tokenExpires-time()));
 
         $ch = curl_init();
-        $this->SendDebug(__FUNCTION__ . ' URL', $this->base_url . $endpoint, 0);
+        $this->logger(__FUNCTION__, $this->base_url . $endpoint);
         curl_setopt($ch, CURLOPT_URL, $this->base_url . $endpoint);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
@@ -541,36 +544,38 @@ class TeslaSplitter extends IPSModule
         }
 
         $apiResult = curl_exec($ch);
-        $headerInfo = curl_getinfo($ch);
-        $apiResultJson = json_decode($apiResult, true);
-        curl_close($ch);
-
-        if (is_array($apiResultJson)) {
-            if (array_key_exists('error', $apiResultJson)) {
-                $this->SendDebug(__FUNCTION__, $apiResultJson['error'], 0);
-                if (fnmatch('*vehicle unavailable*', $apiResultJson['error'])) {
-                    IPS_LogMessage('Tesla', 'Vehicle unavailable');
-                    return false;
-                }
-            }
-        } else {
-            IPS_LogMessage('Tesla', 'Vehicle unavailable');
-            return false;
-        }
 
         $result = [];
         if ($apiResult === false) {
             $result['errorcode'] = 0;
             $result['errormessage'] = curl_error($ch);
-            $this->SendDebug(__FUNCTION__ . ' Error', $result['errorcode'] . ': ' . $result['errormessage'], 0);
+            $this->logger(__FUNCTION__, $result['errorcode'] . ': ' . $result['errormessage'], KL_ERROR);
             return false;
         }
+
+        $headerInfo = curl_getinfo($ch);
+        curl_close($ch);
         if (!in_array($headerInfo['http_code'], ['200', '201', '204'])) {
-            $result['errorcode'] = $headerInfo['http_code'];
+            $errorMsg = $headerInfo['http_code'] . ': ';
             if (isset($apiresult)) {
-                $result['errormessage'] = $apiresult;
+                $errorMsg .= $apiresult;
             }
-            $this->SendDebug(__FUNCTION__ . ' Error', $result['errorcode'], 0);
+            $this->logger(__FUNCTION__, $errorMsg, KL_ERROR);
+            return false;
+        }
+
+        $apiResultJson = json_decode($apiResult, true);
+
+        if (is_array($apiResultJson)) {
+            if (array_key_exists('error', $apiResultJson)) {
+                $this->logger(__FUNCTION__, $apiResultJson['error']);
+                if (fnmatch('*vehicle unavailable*', $apiResultJson['error'])) {
+                    $this->logger(__FUNCTION__, 'Vehicle unavailable');
+                    return false;
+                }
+            }
+        } else {
+            $this->logger(__FUNCTION__, 'Vehicle unavailable');
             return false;
         }
 
@@ -628,5 +633,12 @@ class TeslaSplitter extends IPSModule
 
             $this->setCookies($knownCookies);
         }
+    }
+
+    private function logger(string $sender, string $message, int $type=KL_DEBUG){
+        if($this->ReadPropertyBoolean('ShowDebugMessages') && ($type == KL_DEBUG || $type == KL_MESSAGE))
+            IPS_LogMessage('TeslaSplitter '.$sender, $message);
+        else
+            $this->LogMessage($sender.' - '.$message, $type);
     }
 }
