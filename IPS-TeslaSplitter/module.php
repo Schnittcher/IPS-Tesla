@@ -479,17 +479,17 @@ class TeslaSplitter extends IPSModule
         $headerInfo = curl_getinfo($ch);
         $apiResult = json_decode($apiResultJSON, true);
         curl_close($ch);
-        $this->logger(__FUNCTION__, 'API RESULT: '.$apiResultJSON);
+        $this->logger(__FUNCTION__, 'API RESULT: ' . $apiResultJSON);
         if (is_array($apiResult)) {
             if (array_key_exists('access_token', $apiResult)) {
                 $this->WriteAttributeString('AccessToken', $apiResult['access_token']);
             }
             if (array_key_exists('expires_in', $apiResult)) {
-                $this->WriteAttributeInteger('AccessTokenExpiresAt', time()+$apiResult['expires_in']-10);
+                $this->WriteAttributeInteger('AccessTokenExpiresAt', time() + $apiResult['expires_in'] - 10);
             }
         }
 
-        $this->logger(__FUNCTION__, 'next Token refresh at '.date('H:i:s, d.m', $this->ReadAttributeInteger('AccessTokenExpiresAt')));
+        $this->logger(__FUNCTION__, 'next Token refresh at ' . date('H:i:s, d.m', $this->ReadAttributeInteger('AccessTokenExpiresAt')));
         //$this->WriteAttributeString('Token', $apiResult['access_token']);
     }
 
@@ -511,17 +511,16 @@ class TeslaSplitter extends IPSModule
 
         if ($this->ReadAttributeString('AccessToken') == '') {
             $accessToken = $this->ReadPropertyString('AccessToken'); // Get Token from User Config
-        }else {
+        } else {
             $accessToken = $this->ReadAttributeString('AccessToken');
         }
         $tokenExpires = $this->ReadAttributeInteger('AccessTokenExpiresAt');
-
 
         if (time() >= ($tokenExpires - 1800)) {
             $this->refreshToken();
             $accessToken = $this->ReadAttributeString('AccessToken');
         }
-        $this->logger(__FUNCTION__, 'sent at: '.time().' token expires at: '.$tokenExpires.', valid for: '.($tokenExpires-time()));
+        $this->logger(__FUNCTION__, 'sent at: ' . time() . ' token expires at: ' . $tokenExpires . ', valid for: ' . ($tokenExpires - time()));
 
         $ch = curl_init();
         $this->logger(__FUNCTION__, $this->base_url . $endpoint);
@@ -639,10 +638,12 @@ class TeslaSplitter extends IPSModule
         }
     }
 
-    private function logger(string $sender, string $message, int $type=KL_DEBUG){
-        if($this->ReadPropertyBoolean('ShowDebugMessages') && ($type == KL_DEBUG || $type == KL_MESSAGE))
-            IPS_LogMessage('TeslaSplitter '.$sender, $message);
-        else
-            $this->LogMessage($sender.' - '.$message, $type);
+    private function logger(string $sender, string $message, int $type = KL_DEBUG)
+    {
+        if ($this->ReadPropertyBoolean('ShowDebugMessages') && ($type == KL_DEBUG || $type == KL_MESSAGE)) {
+            IPS_LogMessage('TeslaSplitter ' . $sender, $message);
+        } else {
+            $this->LogMessage($sender . ' - ' . $message, $type);
+        }
     }
 }
