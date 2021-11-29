@@ -48,34 +48,37 @@ class TeslaVehicleControl extends IPSModule
         IPS_SetIcon($IDChargeLimit, 'Battery');
         $this->EnableAction('ChargeLimit');
 
-        $this->RegisterVariableInteger('ClimateAutoConditioning', $this->Translate('Climate Auto Conditioning'), 'Tesla.ClimateAutoConditioning', 9);
+        $this->RegisterVariableInteger('ChargingAmps', $this->Translate('Charging Amps'), 'Tesla.ChargingAmps', 9);
+        $this->EnableAction('ChargingAmps');
+
+        $this->RegisterVariableInteger('ClimateAutoConditioning', $this->Translate('Climate Auto Conditioning'), 'Tesla.ClimateAutoConditioning', 20);
         $this->EnableAction('ClimateAutoConditioning');
 
-        $this->RegisterVariableFloat('DriverTemp', $this->Translate('Driver Temperature'), '~Temperature', 10);
+        $this->RegisterVariableFloat('DriverTemp', $this->Translate('Driver Temperature'), '~Temperature', 21);
         $this->EnableAction('DriverTemp');
 
-        $this->RegisterVariableFloat('PassengerTemp', $this->Translate('Passenger Temperature'), '~Temperature', 11);
+        $this->RegisterVariableFloat('PassengerTemp', $this->Translate('Passenger Temperature'), '~Temperature', 22);
         $this->EnableAction('PassengerTemp');
 
-        $this->RegisterVariableInteger('SetTemperature', $this->Translate('Set Temperature'), 'Tesla.SetTemperature', 12);
+        $this->RegisterVariableInteger('SetTemperature', $this->Translate('Set Temperature'), 'Tesla.SetTemperature', 23);
         $this->EnableAction('SetTemperature');
 
-        $this->RegisterVariableInteger('RemoteSeatHeaterHeater', $this->Translate('Remote Seat Heater Heater'), 'Tesla.RemoteSeatHeaterHeater', 13);
+        $this->RegisterVariableInteger('RemoteSeatHeaterHeater', $this->Translate('Remote Seat Heater Heater'), 'Tesla.RemoteSeatHeaterHeater', 24);
         $this->EnableAction('RemoteSeatHeaterHeater');
 
-        $this->RegisterVariableInteger('RemoteSeatHeaterLevel', $this->Translate('Remote Seat Heater Level'), 'Tesla.RemoteSeatHeaterLevel', 14);
+        $this->RegisterVariableInteger('RemoteSeatHeaterLevel', $this->Translate('Remote Seat Heater Level'), 'Tesla.RemoteSeatHeaterLevel', 25);
         $this->EnableAction('RemoteSeatHeaterLevel');
 
-        $this->RegisterVariableInteger('SetRemoteSeatHeater', $this->Translate('Set Remote Seat Heater'), 'Tesla.SetRemoteSeatHeater', 15);
+        $this->RegisterVariableInteger('SetRemoteSeatHeater', $this->Translate('Set Remote Seat Heater'), 'Tesla.SetRemoteSeatHeater', 26);
         $this->EnableAction('SetRemoteSeatHeater');
 
-        $this->RegisterVariableBoolean('RemoteSteeringWheelHeater', $this->Translate('Remote Steering Wheel Heater'), 'Tesla.RemoteSteeringWheelHeater', 16);
+        $this->RegisterVariableBoolean('RemoteSteeringWheelHeater', $this->Translate('Remote Steering Wheel Heater'), 'Tesla.RemoteSteeringWheelHeater', 27);
         $this->EnableAction('RemoteSteeringWheelHeater');
 
-        $this->RegisterVariableInteger('MediaPlayControl', $this->Translate('Media Play Control'), 'Tesla.MediaPlayControl', 17);
+        $this->RegisterVariableInteger('MediaPlayControl', $this->Translate('Media Play Control'), 'Tesla.MediaPlayControl', 28);
         $this->EnableAction('MediaPlayControl');
 
-        $this->RegisterVariableInteger('MediaVolume', $this->Translate('Media Volume'), 'Tesla.MediaVolume', 18);
+        $this->RegisterVariableInteger('MediaVolume', $this->Translate('Media Volume'), 'Tesla.MediaVolume', 29);
         $this->EnableAction('MediaVolume');
 
         $this->RegisterTimer('Tesla_UpdateState', 0, 'Tesla_State($_IPS[\'TARGET\']);');
@@ -242,6 +245,12 @@ class TeslaVehicleControl extends IPSModule
     {
         $params = ['percent' => $value];
         return $this->sendData('SetChargeLimit', $params);
+    }
+
+    public function SetChargingAmps(int $value)
+    {
+        $params = ['charging_amps' => $value];
+        return $this->sendData('SetChargingAmps', $params);
     }
 
     //Climate Functions
@@ -427,6 +436,9 @@ class TeslaVehicleControl extends IPSModule
             case 'ChargeLimit':
                 $this->SetChargeLimit(intval($Value));
                 break;
+            case 'ChargingAmps':
+                $this->SetChargingAmps(intval($Value));
+                break;
             case 'ClimateAutoConditioning':
                 switch ($Value) {
                     case 1:
@@ -578,6 +590,11 @@ class TeslaVehicleControl extends IPSModule
             $Associations[] = [3, $this->Translate('Standard'), '', -1];
             $Associations[] = [4, $this->Translate('Max Range'), '', -1];
             $this->RegisterProfileIntegerEx('Tesla.ChargeControl', 'Battery', '', '', $Associations);
+        }
+
+        //Profile For Charge Amps
+        if (!IPS_VariableProfileExists('Tesla.ChargingAmps')) {
+            $this->RegisterProfileInteger('Tesla.ChargingAmps', 'Battery', '', '', 5, 32, 1);
         }
 
         //Profile for Climate Auto Conditioning

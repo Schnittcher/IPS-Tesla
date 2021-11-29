@@ -223,6 +223,10 @@ class TeslaSplitter extends IPSModule
                 $params = (array) $data->Buffer->Params;
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/command/set_charge_limit', $params, 'POST');
                 break;
+            case 'SetChargingAmps':
+                $params = (array) $data->Buffer->Params;
+                $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/command/set_charging_amps', $params, 'POST');
+                break;
             case 'AutoConditioningStart':
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/command/auto_conditioning_start', [], 'POST');
                 break;
