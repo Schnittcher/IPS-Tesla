@@ -87,12 +87,16 @@ class TeslaSplitter extends IPSModule
         $Form['elements'][6]['name'] = 'RefreshToken';
         $Form['elements'][6]['caption'] = 'RefreshToken';
 
+        $Form['elements'][7]['type'] = 'CheckBox';
+        $Form['elements'][7]['name'] = 'ShowDebugMessages';
+        $Form['elements'][7]['caption'] = 'Zeige Debug Meldungen';
+
         $EMail = $this->ReadPropertyString('EMail');
         $Password = $this->ReadPropertyString('Password');
         $Client_ID = $this->ReadPropertyString('Client_ID');
         $Client_Secret = $this->ReadPropertyString('Client_Secret');
 
-        $FormElementCount = 7;
+        $FormElementCount = 8;
         if ($EMail || $Password || $Client_ID || $Client_Secret != '') {
             $Vehicles = $this->getVehicles();
             if (is_array($Vehicles)) {
@@ -112,14 +116,6 @@ class TeslaSplitter extends IPSModule
                 }
             }
         }
-
-        if ($FormElementCount > 7) {
-            $FormElementCount++;
-        }
-
-        $Form['elements'][$FormElementCount]['type'] = 'CheckBox';
-        $Form['elements'][$FormElementCount]['name'] = 'ShowDebugMessages';
-        $Form['elements'][$FormElementCount]['caption'] = 'Zeige Debug Meldungen';
 
         return json_encode($Form);
     }
