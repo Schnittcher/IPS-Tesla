@@ -113,6 +113,10 @@ class TeslaSplitter extends IPSModule
             }
         }
 
+        if ($FormElementCount > 7) {
+            $FormElementCount++;
+        }
+
         $FormElementCount++;
         $Form['elements'][$FormElementCount]['type'] = 'CheckBox';
         $Form['elements'][$FormElementCount]['name'] = 'ShowDebugMessages';
