@@ -1,33 +1,33 @@
 {
-  "translations": {
-    "de": {
-      "Can Accept Navigation Requests": "Kann Navigationsanfragen annehmen",
-      "Can Actuate Trunks": "Kann Trunks betätigen",
-      "Car Special Type": "Auto Spezial Typ",
-      "Car Type": "Fahrzeugtyp",
-      "Charge Port Type": "Typ des Ladeports",
-      "EU Vehicle": "EU-Fahrzeug",
-      "Exterior Color": "Außenfarbe",
-      "Has Air Suspension": "Hat eine Luftfederung",
-      "Has Ludicrous Mode": "Hat Ludicrous Modus",
-      "Key Version": "Schlüsselversion",
-      "Motorized Charge Port": "Motorisierter Ladeanschluss",
-      "Perf Config": "Perf Konfiguration",
-      "PLG": "PLG ???",
-      "Rear Seat Heaters": "Rücksitzheizungen",
-      "Rear Seat Type": "Rücksitz Typ",
-      "RHD": "RHD ???",
-      "Roof Color": "Dachtyp",
-      "Seat type": "Sitzart",
-      "Spoiler Type": "Spoilertyp",
-      "Sun Roof Installed": "Schiebedach installiert",
-      "Third Row Seats": "Dritte Sitzreihe",
-      "Timestamp": "Zeitstempel",
-      "Trim Badging": "Typenkennzeichnung",
-      "Wheel Type": "Radtyp",
-      "Update Data": "Daten aktualisieren",
-      "seconds": "Sekunden",
-      "Update Interval": "Updateintervall"
+    "translations": {
+        "de": {
+            "Can Accept Navigation Requests": "Kann Navigationsanfragen annehmen",
+            "Can Actuate Trunks": "Kann Trunks betätigen",
+            "Car Special Type": "Auto Spezial Typ",
+            "Car Type": "Fahrzeugtyp",
+            "Charge Port Type": "Typ des Ladeports",
+            "EU Vehicle": "EU-Fahrzeug",
+            "Exterior Color": "Außenfarbe",
+            "Has Air Suspension": "Hat eine Luftfederung",
+            "Has Ludicrous Mode": "Hat Ludicrous Modus",
+            "Key Version": "Schlüsselversion",
+            "Motorized Charge Port": "Motorisierter Ladeanschluss",
+            "Perf Config": "Perf Konfiguration",
+            "PLG": "PLG ???",
+            "Rear Seat Heaters": "Rücksitzheizungen",
+            "Rear Seat Type": "Rücksitz Typ",
+            "RHD": "RHD ???",
+            "Roof Color": "Dachtyp",
+            "Seat type": "Sitzart",
+            "Spoiler Type": "Spoilertyp",
+            "Sun Roof Installed": "Schiebedach installiert",
+            "Third Row Seats": "Dritte Sitzreihe",
+            "Timestamp": "Zeitstempel",
+            "Trim Badging": "Typenkennzeichnung",
+            "Wheel Type": "Radtyp",
+            "Update Data": "Daten aktualisieren",
+            "seconds": "Sekunden",
+            "Update Interval": "Updateintervall"
+        }
     }
-  }
 }

@@ -1,12 +1,12 @@
 {
-  "translations": {
-    "de": {
-      "E-Mail" : "E-Mail",
-      "Password" : "Passwort",
-      "Client ID" : "Client ID",
-      "Client Secret" : "Client Secret",
-      "Vehicles" : "Fahrzeuge",
-      "Please select a car!" : "Bitte wähle ein Fahrzeug aus!"
+    "translations": {
+        "de": {
+            "E-Mail": "E-Mail",
+            "Password": "Passwort",
+            "Client ID": "Client ID",
+            "Client Secret": "Client Secret",
+            "Vehicles": "Fahrzeuge",
+            "Please select a car!": "Bitte wähle ein Fahrzeug aus!"
+        }
     }
-  }
 }

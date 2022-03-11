@@ -1,21 +1,21 @@
 {
-  "translations": {
-    "de": {
-      "GPS as of" : "GPS ab",
-      "Heading" : "Kurs über Grund (Bewegungsrichtung)",
-      "Latitude" : "Breitengrad",
-      "Longitude" : "Längengrad",
-      "Native Latitude" : "Nativer Breitengrad",
-      "Native Location Supported" : "Nativer Standort unterstützt",
-      "Native Longitude" : "Nativer Längengrad",
-      "Native Type" : "Nativer Typ",
-      "Power" : "Leistung",
-      "Shift State" : "Schaltzustand",
-      "Speed" : "Geschwindigkeit",
-      "Timestamp" : "Zeitstempel",
-      "Update Data": "Daten aktualisieren",
-      "seconds": "Sekunden",
-      "Update Interval": "Updateintervall"
+    "translations": {
+        "de": {
+            "GPS as of": "GPS ab",
+            "Heading": "Kurs über Grund (Bewegungsrichtung)",
+            "Latitude": "Breitengrad",
+            "Longitude": "Längengrad",
+            "Native Latitude": "Nativer Breitengrad",
+            "Native Location Supported": "Nativer Standort unterstützt",
+            "Native Longitude": "Nativer Längengrad",
+            "Native Type": "Nativer Typ",
+            "Power": "Leistung",
+            "Shift State": "Schaltzustand",
+            "Speed": "Geschwindigkeit",
+            "Timestamp": "Zeitstempel",
+            "Update Data": "Daten aktualisieren",
+            "seconds": "Sekunden",
+            "Update Interval": "Updateintervall"
+        }
     }
-  }
 }

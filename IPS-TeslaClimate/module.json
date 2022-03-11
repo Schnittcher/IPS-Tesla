@@ -1,11 +1,15 @@
 {
-  "id": "{25101D5C-0935-7306-FBB6-E43AB4D91562}",
-  "name": "TeslaClimate",
-  "type": 3,
-  "vendor": "Tesla",
-  "aliases": [],
-  "parentRequirements": ["{5147BF5F-95B4-BA79-CD98-F05D450F79CB}"],
-  "childRequirements": [],
-  "implemented": ["{941ED049-AD8A-BCE6-163F-E88FF484ADAD}"],
-  "prefix": "Tesla"
+    "id": "{25101D5C-0935-7306-FBB6-E43AB4D91562}",
+    "name": "TeslaClimate",
+    "type": 3,
+    "vendor": "Tesla",
+    "aliases": [],
+    "parentRequirements": [
+        "{5147BF5F-95B4-BA79-CD98-F05D450F79CB}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{941ED049-AD8A-BCE6-163F-E88FF484ADAD}"
+    ],
+    "prefix": "Tesla"
 }

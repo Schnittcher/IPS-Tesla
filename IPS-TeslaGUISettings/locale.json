@@ -1,15 +1,15 @@
 {
-  "translations": {
-    "de": {
-      "GUI 24 Hour Time" : "GUI 24 Stunden Format",
-      "GUI Charge Rate Units" : "GUI Ladeeinheit",
-      "GUI Distance Units" : "GUI Entfernungseinheit",
-      "GUI Range Display" : "GUI Reichweitenanzeige",
-      "GUI Temperature Units" : "GUI Temperatureinheit",
-      "timestamp" : "Zeitstempel",
-      "Update Data": "Daten aktualisieren",
-      "seconds": "Sekunden",
-      "Update Interval": "Updateintervall"
+    "translations": {
+        "de": {
+            "GUI 24 Hour Time": "GUI 24 Stunden Format",
+            "GUI Charge Rate Units": "GUI Ladeeinheit",
+            "GUI Distance Units": "GUI Entfernungseinheit",
+            "GUI Range Display": "GUI Reichweitenanzeige",
+            "GUI Temperature Units": "GUI Temperatureinheit",
+            "timestamp": "Zeitstempel",
+            "Update Data": "Daten aktualisieren",
+            "seconds": "Sekunden",
+            "Update Interval": "Updateintervall"
+        }
     }
-  }
 }
