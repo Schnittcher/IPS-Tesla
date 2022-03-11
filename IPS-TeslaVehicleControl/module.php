@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 require_once __DIR__ . '/../libs/TeslaHelper.php';
+require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.php';
 
 class TeslaVehicleControl extends IPSModule
 {
     use TeslaHelper;
+    use VariableProfileHelper;
 
     public function Create()
     {
