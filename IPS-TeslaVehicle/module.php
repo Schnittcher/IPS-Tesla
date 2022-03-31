@@ -61,6 +61,11 @@ class TeslaVehicle extends IPSModule
         $this->RegisterVariableBoolean('valet_pin_needed', $this->Translate('Valet Pin Needed'));
         $this->RegisterVariableString('vehicle_name', $this->Translate('Vehicle Name'));
 
+        $this->RegisterVariableFloat('tpms_pressure_fl', $this->Translate('Front left tire pressure'));
+        $this->RegisterVariableFloat('tpms_pressure_fr', $this->Translate('Front right tire pressure'));
+        $this->RegisterVariableFloat('tpms_pressure_rl', $this->Translate('Rear left tire pressure'));
+        $this->RegisterVariableFloat('tpms_pressure_rr', $this->Translate('Rear right tire pressure'));
+
         $this->RegisterTimer('Tesla_UpdateVehicle', 0, 'Tesla_FetchData($_IPS[\'TARGET\']);');
     }
 

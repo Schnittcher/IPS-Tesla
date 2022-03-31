@@ -40,7 +40,11 @@
             "Vehicle Name": "Fahrzeugname",
             "Update Data": "Daten aktualisieren",
             "seconds": "Sekunden",
-            "Update Interval": "Updateintervall"
+            "Update Interval": "Updateintervall",
+            "Front left tire pressure": "Reifendruck vorne links",
+            "Front right tire pressure": "Reifendruck vorne rechts",
+            "Rear left tire pressure": "Reifendruck hinten links",
+            "Rear right tire pressure": "Reifendruck hinten rechts"
         }
     }
 }
