@@ -243,6 +243,9 @@ class TeslaSplitter extends IPSModule
             case 'RemoteSteeringWheelHeaterRequest':
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/command/remote_steering_wheel_heater_request', [], 'POST');
                 break;
+            case 'SetPreconditioningMax':
+                $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/command/SetPreconditioningMax', [], 'POST');
+                break;
             case 'MediaTogglePlayback':
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/command/media_toggle_playback', [], 'POST');
                 break;

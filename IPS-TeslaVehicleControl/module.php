@@ -53,6 +53,9 @@ class TeslaVehicleControl extends IPSModule
         $this->RegisterVariableInteger('ChargingAmps', $this->Translate('Charging Amps'), 'Tesla.ChargingAmps', 9);
         $this->EnableAction('ChargingAmps');
 
+        $this->RegisterVariableBoolean('SetPreconditioningMax', $this->Translate('Set Preconditioning Max'), '~Switch', 0);
+        $this->EnableAction('SetPreconditioningMax');
+
         $this->RegisterVariableInteger('ClimateAutoConditioning', $this->Translate('Climate Auto Conditioning'), 'Tesla.ClimateAutoConditioning', 20);
         $this->EnableAction('ClimateAutoConditioning');
 
@@ -289,6 +292,11 @@ class TeslaVehicleControl extends IPSModule
         $params = ['on' => $value];
         return $this->sendData('RemoteSteeringWheelHeaterRequest', $params);
     }
+    public function SetPreconditioningMax(bool $value)
+    {
+        $params = ['on' => $value];
+        return $this->sendData('', $params);
+    }
 
     //Media Functions
     public function MediaTogglePlayback()
@@ -478,6 +486,9 @@ class TeslaVehicleControl extends IPSModule
                 break;
             case 'RemoteSteeringWheelHeater':
                 $this->RemoteSteeringWheelHeaterRequest($Value);
+                break;
+            case 'SetPreconditioningMax':
+                $this->SetPreconditioningMax($Value);
                 break;
             case 'MediaPlayControl':
                 switch ($Value) {
