@@ -295,7 +295,7 @@ class TeslaVehicleControl extends IPSModule
     public function SetPreconditioningMax(bool $value)
     {
         $params = ['on' => $value];
-        return $this->sendData('', $params);
+        return $this->sendData('SetPreconditioningMax', $params);
     }
 
     //Media Functions
