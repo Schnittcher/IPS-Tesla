@@ -137,6 +137,9 @@ class TeslaVehicle extends IPSModule
                         if (@$this->GetIDForIdent($key) != false) {
                             $this->SetValue($key, $Value);
                         } else {
+                            if (is_array($Value)) {
+                                $Value = json_encode($Value);
+                            }
                             $this->SendDebug('Variable not exist', 'Key: ' . $key . ' - Value: ' . $Value, 0);
                         }
                     break;
