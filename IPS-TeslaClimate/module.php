@@ -80,7 +80,7 @@ class TeslaClimate extends IPSModule
         if (!$Data) {
             return false;
         }
-        foreach ($Data['response'] as $key => $Value) {
+        foreach ($Data as $key => $Value) {
             if (@$this->GetIDForIdent($key) != false) {
                 $this->SetValue($key, $Value);
             } else {

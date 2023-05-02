@@ -100,7 +100,7 @@ class TeslaVehicle extends IPSModule
             return false;
         }
 
-        foreach ($Data['response'] as $key => $Value) {
+        foreach ($Data as $key => $Value) {
             switch ($key) {
                 case 'speed_limit_mode':
                     $SpeedLimitMode = $Value;
