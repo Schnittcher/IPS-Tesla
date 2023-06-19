@@ -132,7 +132,7 @@ class TeslaSplitter extends IPSModule
             case 'ChargingState':
                 //$result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/data_request/charge_state');
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/vehicle_data');
-                IPS_LogMessage('Debug Test', print_r($result,true));
+                IPS_LogMessage('Debug Test', var_dump($result));
                 $result = $result['response']['charge_state'];
                 break;
             case 'ClimateState':
