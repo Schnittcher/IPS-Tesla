@@ -133,7 +133,6 @@ class TeslaSplitter extends IPSModule
                 //$result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/data_request/charge_state');
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/vehicle_data');
                 if ($result != false) {
-                    IPS_LogMessage('Debug Test', var_dump($result));
                     $result = $result['response']['charge_state'];
                 } else {
                     $result = false;
