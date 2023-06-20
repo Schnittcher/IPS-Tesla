@@ -68,12 +68,11 @@ class TeslaVehicleConfig extends IPSModule
         $Data['Buffer'] = $Buffer;
         $Data = json_encode($Data);
 
-        $Data = json_decode($this->SendDataToParent($Data), true);
-
-        if (!$Data) {
+        $Data = $this->SendDataToParent($Data);
+        if ($Data == 'false') {
             return false;
         }
-
+        $Data = json_decode($Data, true);
         foreach ($Data as $key => $Value) {
             if (@$this->GetIDForIdent($key) != false) {
                 $this->SetValue($key, $Value);

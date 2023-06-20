@@ -90,7 +90,7 @@ class TeslaCharging extends IPSModule
         $Data = json_encode($Data);
 
         $Data = $this->SendDataToParent($Data);
-        if (!$Data) {
+        if ($Data == 'false') {
             return false;
         }
         $Data = json_decode($Data, true);

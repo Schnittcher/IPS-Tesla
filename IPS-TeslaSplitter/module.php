@@ -141,27 +141,48 @@ class TeslaSplitter extends IPSModule
             case 'ClimateState':
                 //$result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/data_request/climate_state');
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/vehicle_data');
-                $result = $result['response']['climate_state'];
+                if ($result != false) {
+                    $result = $result['response']['climate_state'];
+                } else {
+                    $result = false;
+                }
                 break;
             case 'DriveState':
                 //$result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/data_request/drive_state');
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/vehicle_data');
-                $result = $result['response']['drive_state'];
+                if ($result != false) {
+                    $result = $result['response']['drive_state'];
+                } else {
+                    $result = false;
+                }
                 break;
             case 'GUISettings':
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/vehicle_data');
                 //$result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/data_request/gui_settings');
-                $result = $result['response']['gui_settings'];
+                if ($result != false) {
+                    $result = $result['response']['gui_settings'];
+                } else {
+                    $result = false;
+                }
                 break;
             case 'VehicleState':
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/vehicle_data');
                 //$result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/data_request/vehicle_state');
-                $result = $result['response']['vehicle_state'];
+                if ($result != false) {
+                    $result = $result['response']['vehicle_state'];
+                } else {
+                    $result = false;
+                }
                 break;
             case 'VehicleConfig':
                 //$result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/data_request/vehicle_config');
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/vehicle_data');
-                $result = $result['response']['vehicle_config'];
+                if ($result != false) {
+                    $result = $result['response']['vehicle_config'];
+                } else {
+                    $result = false;
+                }
+                break;
                 break;
             case 'WakeUP':
                 $result = $this->sendRequest('/vehicles/' . $this->ReadPropertyString('Vehicles') . '/wake_up', [], 'POST');
