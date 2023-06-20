@@ -136,7 +136,7 @@ class TeslaSplitter extends IPSModule
                     IPS_LogMessage('Debug Test', var_dump($result));
                     $result = $result['response']['charge_state'];
                 } else {
-                    $result = [];
+                    $result = false;
                 }
                 break;
             case 'ClimateState':
