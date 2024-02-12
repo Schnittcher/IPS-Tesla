@@ -6,17 +6,12 @@ trait TeslaHelper
 {
     protected function isOnline()
     {
-        $Data['DataID'] = '{5147BF5F-95B4-BA79-CD98-F05D450F79CB}';
 
-        $Buffer['Command'] = 'IsOnline';
-        $Buffer['Params'] = '';
-
-        $Data['Buffer'] = $Buffer;
-
-        $Data = json_encode($Data);
-
-        $Data = json_decode($this->SendDataToParent($Data), true);
-        return $Data['response']['state'];
+        return $response = json_decode($this->SendDataToParent(json_encode([
+            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
+            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN'),
+            'Payload'  => ''
+        ])))->response->state;
     }
 
     protected function UnregisterTimer($Name)
