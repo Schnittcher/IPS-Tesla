@@ -31,6 +31,12 @@ class TeslaVehicleDrive extends IPSModuleStrict
         $this->RegisterVariableString('shift_state', $this->Translate('Shift State'));
         $this->RegisterVariableString('speed', $this->Translate('Speed'));
         $this->RegisterVariableString('timestamp', $this->Translate('Timestamp'));
+        $this->RegisterVariableFloat('active_route_latitude', $this->Translate('Active Route Latitude'));
+        $this->RegisterVariableFloat('active_route_longitude', $this->Translate('Active Route Longitude'));
+        $this->RegisterVariableInteger('active_route_traffic_minutes_delay', $this->Translate('Active Route Traffic Minutes Delay'));
+        $this->RegisterVariableInteger('active_route_energy_at_arrival', $this->Translate('Active Route Energy at arrival'));
+        $this->RegisterVariableFloat('active_route_miles_to_arrival', $this->Translate('Active Route Miles to arrival'));
+        $this->RegisterVariableFloat('active_route_route_destination', $this->Translate('Active Route destination'));
 
         $this->RegisterTimer('Tesla_UpdateDrive', 0, 'Tesla_FetchData($_IPS[\'TARGET\']);');
     }
@@ -55,6 +61,8 @@ class TeslaVehicleDrive extends IPSModuleStrict
             'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/vehicle_data',
             'Payload'  => ''
         ])))->response->drive_state;
+
+        IPS_LogMessage('test',print_r($response,true));
 
         foreach ($response as $key => $Value) {
             if (@$this->GetIDForIdent($key) != false) {

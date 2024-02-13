@@ -92,13 +92,7 @@ class TeslaCloud extends IPSModuleStrict
 
     private function MakeURL($endpoint)
     {
-        // For vehicle commands we need to use our special tesla-http-proxy server
-        if (preg_match("~/api/1/vehicles/.*/command/~", $endpoint)) {
-            return sprintf('https://tesla.ipmagic.de%s', $endpoint);
-        }
-        else {
-            return sprintf('https://fleet-api.prd.eu.vn.cloud.tesla.com%s', $endpoint);
-        }
+        return "https://oauth.ipmagic.de/proxy/tesla" . $endpoint;
     }
 
     private function FetchRefreshToken($code): string
@@ -230,12 +224,10 @@ class TeslaCloud extends IPSModuleStrict
         $context = stream_context_create($opts);
 
         $result = file_get_contents($url, false, $context);
-
-        if ((strpos($http_response_header[0], '201') === false)) {
-            echo $http_response_header[0] . PHP_EOL . $result;
-            return '';
+        if ((strpos($http_response_header[0], '200') !== false)) {
+            return $result;
         }
-
-        return $result;
+        echo $http_response_header[0] . PHP_EOL . $result;
+        return '';
     }
 }

@@ -132,70 +132,45 @@ class TeslaVehicleControl extends IPSModuleStrict
 
     public function HonkHorn() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/honk_horn',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('honk_horn', '{}');
+
     }
 
-    public function FlashLights() : string
+    public function FlashLights() : bool
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/flash_lights',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('flash_lights', '{}');
     }
 
     public function RemoteStartDrive() :string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/remote_start_drive',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('remote_start_drive', '{}');
+
     }
+    
 
     //Speed Limit Functions
     public function SetSpeedLimit(int $value) : string
     {
         $params = ['limit_mph' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/speed_limit_set_limit',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('speed_limit_set_limit', json_decode($params));
     }
 
     public function ActivateSpeedLimit(int $value) : string
     {
         $params = ['pin' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/speed_limit_activate',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('speed_limit_activate', json_decode($params));
     }
 
     public function DeactivateSpeedLimit(int $value) : string
     {
         $params = ['pin' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/speed_limit_deactivate',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('speed_limit_deactivate', json_decode($params));
     }
 
     public function ClearPinSpeedLimit(int $value) : string
     {
         $params = ['pin' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/speed_limit_clear_pin',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('speed_limit_clear_pin', json_decode($params));
     }
 
     //Valet Mode Function
@@ -205,50 +180,30 @@ class TeslaVehicleControl extends IPSModuleStrict
             'on'       => $value,
             'password' => $pin
         ];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/set_valet_mode',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('set_valet_mode', json_decode($params));
     }
 
     public function ResetValetPin() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/reset_valet_pin',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('reset_valet_pin', '{}');
     }
 
     //Senty Mode Function
-    public function SetSentryMode(bool $value) : string
+    public function SetSentryMode(bool $value) : bool
     {
         $params = ['on' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/set_sentry_mode',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('set_sentry_mode',json_decode($params));
     }
 
     //Door Functions
     public function DoorUnlock() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/door_unlock',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('door_unlock', '{}');
     }
 
     public function DoorLock() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/door_lock',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('door_lock', '{}');
     }
 
     //Frunk/Trunk Functions
@@ -256,11 +211,7 @@ class TeslaVehicleControl extends IPSModuleStrict
     public function ActuateTrunk(string $value) : string
     {
         $params = ['which_trunk' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/actuate_trunk',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('actuate_trunk',json_decode($params));
     }
 
     //Functions for Sunroof
@@ -268,105 +219,61 @@ class TeslaVehicleControl extends IPSModuleStrict
     public function SunRoofControl(string $value) : string
     {
         $params = ['state' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/sun_roof_control',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('sun_roof_control',json_decode($params));
     }
 
     //Functions for Charging
     public function ChargePortDoorOpen() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/charge_port_door_open',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('charge_port_door_open','{}');
     }
 
     public function ChargePortDoorClose() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/charge_port_door_close',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('charge_port_door_close','{}');
     }
 
     public function ChargeStart() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/charge_start',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('charge_start','{}');
     }
 
     public function ChargeStop() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/charge_stop',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('charge_stop','{}');
     }
 
     public function ChargePortStandard() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/charge_standard',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('charge_standard','{}');
     }
 
     public function ChargeMaxRange() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/charge_max_range',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('charge_max_range','{}');
     }
 
     public function SetChargeLimit(int $value) : string
     {
         $params = ['percent' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/set_charge_limit',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('set_charge_limit',json_decode($params));
     }
 
     public function SetChargingAmps(int $value) : string
     {
         $params = ['charging_amps' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/set_charging_amps',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('set_charging_amps',json_decode($params));
     }
 
     //Climate Functions
     public function AutoConditioningStart() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/auto_conditioning_start',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('auto_conditioning_start','{}');
     }
 
     public function AutoConditioningStop() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/auto_conditioning_stop',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('auto_conditioning_stop','{}');
     }
 
     public function SetTemps(float $driver_temp, float $passenger_temp) : string
@@ -375,11 +282,7 @@ class TeslaVehicleControl extends IPSModuleStrict
             'driver_temp'    => $driver_temp,
             'passenger_temp' => $passenger_temp
         ];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/set_temps',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('set_temps',json_decode($params));
     }
 
     public function RemoteSeatHeaterRequest(int $heater, int $level) : string
@@ -388,94 +291,63 @@ class TeslaVehicleControl extends IPSModuleStrict
             'heater' => $heater,
             'level'  => $level
         ];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/remote_seat_heater_request',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('remote_seat_heater_request',json_decode($params));
     }
 
     public function RemoteSteeringWheelHeaterRequest(bool $value) : string
     {
         $params = ['on' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/remote_steering_wheel_heater_request',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('remote_steering_wheel_heater_request',json_decode($params));
     }
     public function SetPreconditioningMax(bool $value) : string
     {
         $params = ['on' => $value];
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/SetPreconditioningMax',
-            'Payload'  => json_decode($params)
-        ])));
+        return $this->setCommand('set_preconditioning_max',json_decode($params));
     }
 
     //Media Functions
     public function MediaTogglePlayback() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/media_toggle_playback',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('media_toggle_playback','{}');
     }
 
     public function MediaNextTrack() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/media_next_track',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('media_next_track','{}');
     }
 
     public function MediaPrevTrack() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/media_prev_track',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('media_prev_track','{}');
     }
 
     public function MediaNextFav() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/media_next_fav',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('media_prev_fav','{}');
     }
 
     public function MediaPrevFav() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/media_prev_fav',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('media_prev_fav','{}');
     }
 
     public function MediaVolumeUp() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/media_volume_up',
-            'Payload'  => '{}'
-        ])));
+        return $this->setCommand('media_volume_up','{}');
     }
 
     public function MediaVolumeDown() : string
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
+        return $this->setCommand('media_volume_down','{}');
+    }
+
+    private function setCommand($command,$payload) {
+        $response = json_decode($this->SendDataToParent(json_encode([
             'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/media_volume_down',
-            'Payload'  => '{}'
-        ])));
+            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/'.$command,
+            'Payload'  => $payload
+        ])),true);
+        return $response['response']['result'] ?  true : false;
     }
 
     /*TODO Navigation
