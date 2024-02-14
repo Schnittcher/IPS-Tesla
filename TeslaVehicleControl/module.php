@@ -121,16 +121,17 @@ class TeslaVehicleControl extends IPSModuleStrict
         }
     }
 
-    public function WakeUP() : string
+    public function WakeUP() : bool
     {
         return $response = json_decode($this->SendDataToParent(json_encode([
             'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
             'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/wake_up',
             'Payload'  => '{}'
-        ])));
+        ])),true);
+        return $response['response']['result'] ?  true : false;
     }
 
-    public function HonkHorn() : string
+    public function HonkHorn() : bool
     {
         return $this->setCommand('honk_horn', '{}');
 
@@ -149,32 +150,32 @@ class TeslaVehicleControl extends IPSModuleStrict
     
 
     //Speed Limit Functions
-    public function SetSpeedLimit(int $value) : string
+    public function SetSpeedLimit(int $value) : bool
     {
         $params = ['limit_mph' => $value];
         return $this->setCommand('speed_limit_set_limit', json_decode($params));
     }
 
-    public function ActivateSpeedLimit(int $value) : string
+    public function ActivateSpeedLimit(int $value) : bool
     {
         $params = ['pin' => $value];
         return $this->setCommand('speed_limit_activate', json_decode($params));
     }
 
-    public function DeactivateSpeedLimit(int $value) : string
+    public function DeactivateSpeedLimit(int $value) : bool
     {
         $params = ['pin' => $value];
         return $this->setCommand('speed_limit_deactivate', json_decode($params));
     }
 
-    public function ClearPinSpeedLimit(int $value) : string
+    public function ClearPinSpeedLimit(int $value) : bool
     {
         $params = ['pin' => $value];
         return $this->setCommand('speed_limit_clear_pin', json_decode($params));
     }
 
     //Valet Mode Function
-    public function SetValetMode(int $pin, bool $value) : string
+    public function SetValetMode(int $pin, bool $value) : bool
     {
         $params = [
             'on'       => $value,
@@ -183,7 +184,7 @@ class TeslaVehicleControl extends IPSModuleStrict
         return $this->setCommand('set_valet_mode', json_decode($params));
     }
 
-    public function ResetValetPin() : string
+    public function ResetValetPin() : bool
     {
         return $this->setCommand('reset_valet_pin', '{}');
     }
@@ -196,19 +197,19 @@ class TeslaVehicleControl extends IPSModuleStrict
     }
 
     //Door Functions
-    public function DoorUnlock() : string
+    public function DoorUnlock() : bool
     {
         return $this->setCommand('door_unlock', '{}');
     }
 
-    public function DoorLock() : string
+    public function DoorLock() : bool
     {
         return $this->setCommand('door_lock', '{}');
     }
 
     //Frunk/Trunk Functions
     //Value = rear or front
-    public function ActuateTrunk(string $value) : string
+    public function ActuateTrunk(string $value) : bool
     {
         $params = ['which_trunk' => $value];
         return $this->setCommand('actuate_trunk',json_decode($params));
@@ -216,67 +217,67 @@ class TeslaVehicleControl extends IPSModuleStrict
 
     //Functions for Sunroof
     //$value vent or close
-    public function SunRoofControl(string $value) : string
+    public function SunRoofControl(string $value) : bool
     {
         $params = ['state' => $value];
         return $this->setCommand('sun_roof_control',json_decode($params));
     }
 
     //Functions for Charging
-    public function ChargePortDoorOpen() : string
+    public function ChargePortDoorOpen() : bool
     {
         return $this->setCommand('charge_port_door_open','{}');
     }
 
-    public function ChargePortDoorClose() : string
+    public function ChargePortDoorClose() : bool
     {
         return $this->setCommand('charge_port_door_close','{}');
     }
 
-    public function ChargeStart() : string
+    public function ChargeStart() : bool
     {
         return $this->setCommand('charge_start','{}');
     }
 
-    public function ChargeStop() : string
+    public function ChargeStop() : bool
     {
         return $this->setCommand('charge_stop','{}');
     }
 
-    public function ChargePortStandard() : string
+    public function ChargePortStandard() : bool
     {
         return $this->setCommand('charge_standard','{}');
     }
 
-    public function ChargeMaxRange() : string
+    public function ChargeMaxRange() : bool
     {
         return $this->setCommand('charge_max_range','{}');
     }
 
-    public function SetChargeLimit(int $value) : string
+    public function SetChargeLimit(int $value) : bool
     {
         $params = ['percent' => $value];
         return $this->setCommand('set_charge_limit',json_decode($params));
     }
 
-    public function SetChargingAmps(int $value) : string
+    public function SetChargingAmps(int $value) : bool
     {
         $params = ['charging_amps' => $value];
         return $this->setCommand('set_charging_amps',json_decode($params));
     }
 
     //Climate Functions
-    public function AutoConditioningStart() : string
+    public function AutoConditioningStart() : bool
     {
         return $this->setCommand('auto_conditioning_start','{}');
     }
 
-    public function AutoConditioningStop() : string
+    public function AutoConditioningStop() : bool
     {
         return $this->setCommand('auto_conditioning_stop','{}');
     }
 
-    public function SetTemps(float $driver_temp, float $passenger_temp) : string
+    public function SetTemps(float $driver_temp, float $passenger_temp) : bool
     {
         $params = [
             'driver_temp'    => $driver_temp,
@@ -285,7 +286,7 @@ class TeslaVehicleControl extends IPSModuleStrict
         return $this->setCommand('set_temps',json_decode($params));
     }
 
-    public function RemoteSeatHeaterRequest(int $heater, int $level) : string
+    public function RemoteSeatHeaterRequest(int $heater, int $level) : bool
     {
         $params = [
             'heater' => $heater,
@@ -294,49 +295,49 @@ class TeslaVehicleControl extends IPSModuleStrict
         return $this->setCommand('remote_seat_heater_request',json_decode($params));
     }
 
-    public function RemoteSteeringWheelHeaterRequest(bool $value) : string
+    public function RemoteSteeringWheelHeaterRequest(bool $value) : bool
     {
         $params = ['on' => $value];
         return $this->setCommand('remote_steering_wheel_heater_request',json_decode($params));
     }
-    public function SetPreconditioningMax(bool $value) : string
+    public function SetPreconditioningMax(bool $value) : bool
     {
         $params = ['on' => $value];
         return $this->setCommand('set_preconditioning_max',json_decode($params));
     }
 
     //Media Functions
-    public function MediaTogglePlayback() : string
+    public function MediaTogglePlayback() : bool
     {
         return $this->setCommand('media_toggle_playback','{}');
     }
 
-    public function MediaNextTrack() : string
+    public function MediaNextTrack() : bool
     {
         return $this->setCommand('media_next_track','{}');
     }
 
-    public function MediaPrevTrack() : string
+    public function MediaPrevTrack() : bool
     {
         return $this->setCommand('media_prev_track','{}');
     }
 
-    public function MediaNextFav() : string
+    public function MediaNextFav() : bool
     {
         return $this->setCommand('media_prev_fav','{}');
     }
 
-    public function MediaPrevFav() : string
+    public function MediaPrevFav() : bool
     {
         return $this->setCommand('media_prev_fav','{}');
     }
 
-    public function MediaVolumeUp() : string
+    public function MediaVolumeUp() : bool
     {
         return $this->setCommand('media_volume_up','{}');
     }
 
-    public function MediaVolumeDown() : string
+    public function MediaVolumeDown() : bool
     {
         return $this->setCommand('media_volume_down','{}');
     }
