@@ -153,25 +153,25 @@ class TeslaVehicleControl extends IPSModuleStrict
     public function SetSpeedLimit(int $value) : bool
     {
         $params = ['limit_mph' => $value];
-        return $this->setCommand('speed_limit_set_limit', json_decode($params));
+        return $this->setCommand('speed_limit_set_limit', json_encode($params));
     }
 
     public function ActivateSpeedLimit(int $value) : bool
     {
         $params = ['pin' => $value];
-        return $this->setCommand('speed_limit_activate', json_decode($params));
+        return $this->setCommand('speed_limit_activate', json_encode($params));
     }
 
     public function DeactivateSpeedLimit(int $value) : bool
     {
         $params = ['pin' => $value];
-        return $this->setCommand('speed_limit_deactivate', json_decode($params));
+        return $this->setCommand('speed_limit_deactivate', json_encode($params));
     }
 
     public function ClearPinSpeedLimit(int $value) : bool
     {
         $params = ['pin' => $value];
-        return $this->setCommand('speed_limit_clear_pin', json_decode($params));
+        return $this->setCommand('speed_limit_clear_pin', json_encode($params));
     }
 
     //Valet Mode Function
@@ -181,7 +181,7 @@ class TeslaVehicleControl extends IPSModuleStrict
             'on'       => $value,
             'password' => $pin
         ];
-        return $this->setCommand('set_valet_mode', json_decode($params));
+        return $this->setCommand('set_valet_mode', json_encode($params));
     }
 
     public function ResetValetPin() : bool
@@ -193,7 +193,7 @@ class TeslaVehicleControl extends IPSModuleStrict
     public function SetSentryMode(bool $value) : bool
     {
         $params = ['on' => $value];
-        return $this->setCommand('set_sentry_mode',json_decode($params));
+        return $this->setCommand('set_sentry_mode',json_encode($params));
     }
 
     //Door Functions
@@ -212,7 +212,7 @@ class TeslaVehicleControl extends IPSModuleStrict
     public function ActuateTrunk(string $value) : bool
     {
         $params = ['which_trunk' => $value];
-        return $this->setCommand('actuate_trunk',json_decode($params));
+        return $this->setCommand('actuate_trunk',json_encode($params));
     }
 
     //Functions for Sunroof
@@ -220,7 +220,7 @@ class TeslaVehicleControl extends IPSModuleStrict
     public function SunRoofControl(string $value) : bool
     {
         $params = ['state' => $value];
-        return $this->setCommand('sun_roof_control',json_decode($params));
+        return $this->setCommand('sun_roof_control',json_encode($params));
     }
 
     //Functions for Charging
@@ -257,13 +257,13 @@ class TeslaVehicleControl extends IPSModuleStrict
     public function SetChargeLimit(int $value) : bool
     {
         $params = ['percent' => $value];
-        return $this->setCommand('set_charge_limit',json_decode($params));
+        return $this->setCommand('set_charge_limit',json_encode($params));
     }
 
     public function SetChargingAmps(int $value) : bool
     {
         $params = ['charging_amps' => $value];
-        return $this->setCommand('set_charging_amps',json_decode($params));
+        return $this->setCommand('set_charging_amps',json_encode($params));
     }
 
     //Climate Functions
@@ -283,7 +283,7 @@ class TeslaVehicleControl extends IPSModuleStrict
             'driver_temp'    => $driver_temp,
             'passenger_temp' => $passenger_temp
         ];
-        return $this->setCommand('set_temps',json_decode($params));
+        return $this->setCommand('set_temps',json_encode($params));
     }
 
     public function RemoteSeatHeaterRequest(int $heater, int $level) : bool
@@ -292,18 +292,18 @@ class TeslaVehicleControl extends IPSModuleStrict
             'heater' => $heater,
             'level'  => $level
         ];
-        return $this->setCommand('remote_seat_heater_request',json_decode($params));
+        return $this->setCommand('remote_seat_heater_request',json_encode($params));
     }
 
     public function RemoteSteeringWheelHeaterRequest(bool $value) : bool
     {
         $params = ['on' => $value];
-        return $this->setCommand('remote_steering_wheel_heater_request',json_decode($params));
+        return $this->setCommand('remote_steering_wheel_heater_request',json_encode($params));
     }
     public function SetPreconditioningMax(bool $value) : bool
     {
         $params = ['on' => $value];
-        return $this->setCommand('set_preconditioning_max',json_decode($params));
+        return $this->setCommand('set_preconditioning_max',json_encode($params));
     }
 
     //Media Functions
@@ -342,7 +342,7 @@ class TeslaVehicleControl extends IPSModuleStrict
         return $this->setCommand('media_volume_down','{}');
     }
 
-    private function setCommand($command,$payload) {
+    private function setCommand($command,$payload) : bool {
         $response = json_decode($this->SendDataToParent(json_encode([
             'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
             'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/command/'.$command,
