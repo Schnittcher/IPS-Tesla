@@ -123,12 +123,12 @@ class TeslaVehicleControl extends IPSModuleStrict
 
     public function WakeUP() : bool
     {
-        return $response = json_decode($this->SendDataToParent(json_encode([
+        $response = json_decode($this->SendDataToParent(json_encode([
             'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
             'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/wake_up',
             'Payload'  => '{}'
         ])),true);
-        return $response['response']['result'] ?  true : false;
+        return ($response['response']['state'] == 'online'  ?  true : false);
     }
 
     public function HonkHorn() : bool
