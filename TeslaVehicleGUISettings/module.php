@@ -49,7 +49,7 @@ class TeslaVehicleGUISettings extends IPSModuleStrict
             'Payload'  => ''
         ])));
 
-        if ($respone->response != null) {
+        if ($response->response != null) {
             foreach ($response->response->gui_settings as $key => $Value) {
                 if (@$this->GetIDForIdent($key) != false) {
                     $this->SetValue($key, $Value);
