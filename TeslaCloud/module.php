@@ -15,7 +15,6 @@ class TeslaCloud extends IPSModuleStrict
         $this->RegisterAttributeString('Token', '');
 
         $this->RegisterOAuth($this->oauthIdentifer);
-
     }
 
     public function ApplyChanges(): void
@@ -57,7 +56,6 @@ class TeslaCloud extends IPSModuleStrict
 
         //Return everything which will open the browser
         return 'https://' . $this->oauthServer . '/authorize/' . $this->oauthIdentifer . '?username=' . urlencode(IPS_GetLicensee());
-
     }
 
     /**
@@ -68,7 +66,6 @@ class TeslaCloud extends IPSModuleStrict
 
         //Lets assume requests via GET are for code exchange. This might not fit your needs!
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
             if (!isset($_GET['code'])) {
                 die('Authorization Code expected');
             }
@@ -80,24 +77,20 @@ class TeslaCloud extends IPSModuleStrict
             $this->WriteAttributeString('Token', $token);
             $this->SetStatus(IS_ACTIVE);
             $this->UpdateFormField('Token', 'caption', 'Token: ' . substr($token, 0, 16) . '...');
-
         } else {
 
             //Just print raw post data!
             echo file_get_contents('php://input');
-
         }
-
     }
 
     private function MakeURL($endpoint)
     {
-        return "https://oauth.ipmagic.de/proxy/tesla" . $endpoint;
+        return 'https://oauth.ipmagic.de/proxy/tesla' . $endpoint;
     }
 
     private function FetchRefreshToken($code): string
     {
-
         $this->SendDebug('FetchRefreshToken', 'Use Authentication Code to get our precious Refresh Token!', 0);
 
         //Exchange our Authentication Code for a permanent Refresh Token and a temporary Access Token
@@ -176,7 +169,6 @@ class TeslaCloud extends IPSModuleStrict
                 $this->WriteAttributeString('Token', $data->refresh_token);
                 $this->UpdateFormField('Token', 'caption', 'Token: ' . substr($data->refresh_token, 0, 16) . '...');
             }
-
         }
 
         $this->SendDebug('FetchAccessToken', 'CACHE! New Access Token is valid until ' . date('d.m.y H:i:s', $Expires), 0);
@@ -186,12 +178,10 @@ class TeslaCloud extends IPSModuleStrict
 
         //Return current Token
         return $Token;
-
     }
 
     private function GetData($url): string
     {
-
         $opts = [
             'http' => [
                 'method'        => 'GET',
@@ -202,6 +192,11 @@ class TeslaCloud extends IPSModuleStrict
         $context = stream_context_create($opts);
 
         $result = file_get_contents($url, false, $context);
+
+        if ((strpos($http_response_header[0], '408') === false)) {
+            $this->SendDebug('State', 'Standby', 0);
+            return '';
+        }
 
         if ((strpos($http_response_header[0], '200') === false)) {
             echo $http_response_header[0] . PHP_EOL . $result;
