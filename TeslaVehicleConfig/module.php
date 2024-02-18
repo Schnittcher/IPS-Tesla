@@ -66,14 +66,15 @@ class TeslaVehicleConfig extends IPSModuleStrict
             'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
             'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/vehicle_data',
             'Payload'  => ''
-        ])))->response->vehicle_config;
-
-        foreach ($response as $key => $Value) {
+        ])));
+        if ($response->response != null) {
+        foreach ($response->response->vehicle_config as $key => $Value) {
             if (@$this->GetIDForIdent($key) != false) {
                 $this->SetValue($key, $Value);
             } else {
                 $this->SendDebug('Variable not exist', 'Key: ' . $key . ' - Value: ' . $Value, 0);
             }
         }
+    }
     }
 }
