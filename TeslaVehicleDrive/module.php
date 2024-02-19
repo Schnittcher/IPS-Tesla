@@ -9,14 +9,14 @@ class TeslaVehicleDrive extends IPSModuleStrict
     use TeslaHelper;
     use VariableProfileHelper;
 
-    public function Create() : void
+    public function Create(): void
     {
         //Never delete this line!
         parent::Create();
 
         $this->ConnectParent('{D5994951-CD92-78B7-A059-3D423FCB599A}');
 
-        $this->RegisterPropertyString('VIN','');
+        $this->RegisterPropertyString('VIN', '');
         $this->RegisterPropertyInteger('Interval', 60);
 
         $this->RegisterVariableString('gps_as_of', $this->Translate('GPS as of'));
@@ -41,35 +41,30 @@ class TeslaVehicleDrive extends IPSModuleStrict
         $this->RegisterTimer('Tesla_UpdateDrive', 0, 'Tesla_FetchData($_IPS[\'TARGET\']);');
     }
 
-    public function Destroy() : void
+    public function Destroy(): void
     {
         $this->UnregisterTimer('Tesla_UpdateDrive');
     }
 
-    public function ApplyChanges() : void
+    public function ApplyChanges(): void
     {
 
         //Never delete this line!
         parent::ApplyChanges();
     }
 
-
-    public function FetchData() : void
+    public function ReceiveData($JSONString): string
     {
-        $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/vehicle_data',
-            'Payload'  => ''
-        ])));
+        $response = json_decode($JSONString);
 
         if ($response->response != null) {
-        foreach ($response->response->drive_state as $key => $Value) {
-            if (@$this->GetIDForIdent($key) != false) {
-                $this->SetValue($key, $Value);
-            } else {
-                $this->SendDebug('Variable not exist', 'Key: ' . $key . ' - Value: ' . $Value, 0);
+            foreach ($response->response->drive_state as $key => $Value) {
+                if (@$this->GetIDForIdent($key) != false) {
+                    $this->SetValue($key, $Value);
+                } else {
+                    $this->SendDebug('Variable not exist', 'Key: ' . $key . ' - Value: ' . $Value, 0);
+                }
             }
         }
-    }
     }
 }

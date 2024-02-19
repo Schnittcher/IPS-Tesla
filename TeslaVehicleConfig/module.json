@@ -5,11 +5,11 @@
     "vendor": "Tesla",
     "aliases": ["Tesla Vehicle Config"],
     "parentRequirements": [
-        "{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}"
+        "{675AD8E8-253B-71E3-7304-6C8D9CDCD50B}"
     ],
     "childRequirements": [],
     "implemented": [
-        "{F0FB088E-59B9-2E9B-3449-58DB508412B0}"
+        "{9825E0F7-B5DF-6ED8-4F73-5C7366FBB11F}"
     ],
     "url": "https://github.com/Schnittcher/IPS-Tesla",
     "prefix": "Tesla"

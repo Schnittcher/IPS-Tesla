@@ -14,10 +14,7 @@ class TeslaVehicleClimate extends IPSModuleStrict
         //Never delete this line!
         parent::Create();
 
-        $this->ConnectParent('{D5994951-CD92-78B7-A059-3D423FCB599A}');
-
-        $this->RegisterPropertyString('VIN','');
-        $this->RegisterPropertyInteger('Interval', 60);
+        $this->ConnectParent('{72887112-E270-FFC1-04AC-817D82F42027}');
 
         $this->RegisterVariableBoolean('battery_heater', $this->Translate('Battery Heater'));
         $this->RegisterVariableBoolean('defrost_mode', $this->Translate('Defrost Mode'));
@@ -50,14 +47,8 @@ class TeslaVehicleClimate extends IPSModuleStrict
         $this->RegisterVariableBoolean('steering_wheel_heater', $this->Translate('Steering Wheel Heater'));
         $this->RegisterVariableInteger('timestamp', $this->Translate('Timestamp'));
         $this->RegisterVariableBoolean('wiper_blade_heater', $this->Translate('Wiper Blade Heater'));
-
-        $this->RegisterTimer('Tesla_UpdateClimate', 0, 'Tesla_FetchData($_IPS[\'TARGET\']);');
     }
 
-    public function Destroy() : void
-    {
-        $this->UnregisterTimer('Tesla_UpdateClimate');
-    }
 
     public function ApplyChanges() : void
     {
@@ -66,13 +57,10 @@ class TeslaVehicleClimate extends IPSModuleStrict
         parent::ApplyChanges();
     }
 
-    public function FetchData() : void
+    public function ReceiveData($JSONString): string
     {
-        $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/vehicle_data',
-            'Payload'  => ''
-        ])));
+        $response = json_decode($JSONString);
+
         if ($response->response != null) {
         foreach ($response->response->climate_state as $key => $Value) {
             if (@$this->GetIDForIdent($key) != false) {

@@ -79,14 +79,10 @@ class TeslaVehicleCharging extends IPSModuleStrict
         $this->SetTimerInterval('Tesla_UpdateCharging', $this->ReadPropertyInteger('Interval') * 1000);
     }
 
-    public function FetchData() : void
+    public function ReceiveData($JSONString): string
     {
-        $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/vehicle_data',
-            'Payload'  => ''
-        ])));        
-        
+        $response = json_decode($JSONString);
+
         if ($response->response != null) {;
         foreach ($response->response->charge_state as $key => $Value) {
             if (@$this->GetIDForIdent($key) != false) {

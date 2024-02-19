@@ -14,10 +14,7 @@ class TeslaVehicleConfig extends IPSModuleStrict
         //Never delete this line!
         parent::Create();
 
-        $this->ConnectParent('{D5994951-CD92-78B7-A059-3D423FCB599A}');
-
-        $this->RegisterPropertyString('VIN','');
-        $this->RegisterPropertyInteger('Interval', 60);
+        $this->ConnectParent('{72887112-E270-FFC1-04AC-817D82F42027}');
 
         $this->RegisterVariableBoolean('can_accept_navigation_requests', $this->Translate('Can Accept Navigation Requests'));
         $this->RegisterVariableBoolean('can_actuate_trunks', $this->Translate('Can Actuate Trunks'));
@@ -44,29 +41,19 @@ class TeslaVehicleConfig extends IPSModuleStrict
         $this->RegisterVariableString('trim_badging', $this->Translate('Trim Badging'));
         $this->RegisterVariableString('wheel_type', $this->Translate('Wheel Type'));
 
-        $this->RegisterTimer('Tesla_UpdateVehicleConfig', 0, 'Tesla_FetchData($_IPS[\'TARGET\']);');
-    }
-
-    public function Destroy() : void
-    {
-        $this->UnregisterTimer('Tesla_UpdateVehicleConfig');
     }
 
     public function ApplyChanges() : void
     {
-
         //Never delete this line!
         parent::ApplyChanges();
     }
 
 
-    public function FetchData() : void
+    public function ReceiveData($JSONString): string
     {
-        $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/vehicle_data',
-            'Payload'  => ''
-        ])));
+        $response = json_decode($JSONString);
+
         if ($response->response != null) {
         foreach ($response->response->vehicle_config as $key => $Value) {
             if (@$this->GetIDForIdent($key) != false) {

@@ -14,10 +14,7 @@ class TeslaVehicle extends IPSModuleStrict
         //Never delete this line!
         parent::Create();
 
-        $this->ConnectParent('{D5994951-CD92-78B7-A059-3D423FCB599A}');
-
-        $this->RegisterPropertyString('VIN','');
-        $this->RegisterPropertyInteger('Interval', 60);
+        $this->ConnectParent('{72887112-E270-FFC1-04AC-817D82F42027}');
 
         $this->RegisterVariableInteger('api_version', $this->Translate('API Version'));
         $this->RegisterVariableString('autopark_state_v2', $this->Translate('Autopark State V2'));
@@ -65,15 +62,7 @@ class TeslaVehicle extends IPSModuleStrict
         $this->RegisterVariableFloat('tpms_pressure_fl', $this->Translate('Front left tire pressure'));
         $this->RegisterVariableFloat('tpms_pressure_fr', $this->Translate('Front right tire pressure'));
         $this->RegisterVariableFloat('tpms_pressure_rl', $this->Translate('Rear left tire pressure'));
-        $this->RegisterVariableFloat('tpms_pressure_rr', $this->Translate('Rear right tire pressure'));
-
-        $this->RegisterTimer('Tesla_UpdateVehicle', 0, 'Tesla_FetchData($_IPS[\'TARGET\']);');
-    }
-
-    public function Destroy() : void
-    {
-        $this->UnregisterTimer('Tesla_UpdateVehicle');
-    }
+        $this->RegisterVariableFloat('tpms_pressure_rr', $this->Translate('Rear right tire pressure'));    }
 
     public function ApplyChanges() : void
     {
@@ -82,13 +71,9 @@ class TeslaVehicle extends IPSModuleStrict
         parent::ApplyChanges();
     }
 
-    public function FetchData() : void
+    public function ReceiveData($JSONString): string
     {
-        $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN') . '/vehicle_data',
-            'Payload'  => ''
-        ])));
+        $response = json_decode($JSONString);
 
         if ($response->response != null) {
         foreach ($response->response->vehicle_state as $key => $Value) {

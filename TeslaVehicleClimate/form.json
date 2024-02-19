@@ -1,15 +1,5 @@
 {
     "elements": [
-        {
-            "type": "ValidationTextBox",
-            "name": "VIN",
-            "caption": "VIN"
-        },
-        {
-            "type": "IntervalBox",
-            "name": "Interval",
-            "caption": "seconds"
-        }
     ],
     "actions": [
         {

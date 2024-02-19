@@ -1,16 +1,19 @@
 {
-    "id": "{1F2A252B-E9EB-9B70-BC63-0E08E4523785}",
-    "name": "Tesla Configurator",
-    "type": 4,
+    "id": "{72887112-E270-FFC1-04AC-817D82F42027}",
+    "name": "TeslaVehicleConnector",
+    "type": 2,
     "vendor": "Tesla",
     "aliases": [
-        "Tesla Configurator"
+        "Tesla Vehicle Connector"
     ],
     "parentRequirements": [
         "{83D77BA9-04CB-17F2-A0F9-43293FE8448C}"
     ],
-    "childRequirements": [],
+    "childRequirements": [
+        "{9825E0F7-B5DF-6ED8-4F73-5C7366FBB11F}"
+    ],
     "implemented": [
+        "{675AD8E8-253B-71E3-7304-6C8D9CDCD50B}",
         "{0748AB9F-1E48-D5B2-E3D3-B48B5705D54F}"
     ],
     "url": "https://github.com/Schnittcher/IPS-Tesla",
