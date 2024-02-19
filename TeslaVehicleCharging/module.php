@@ -9,15 +9,12 @@ class TeslaVehicleCharging extends IPSModuleStrict
     use TeslaHelper;
     use VariableProfileHelper;
 
-    public function Create() : void
+    public function Create(): void
     {
         //Never delete this line!
         parent::Create();
 
-        $this->ConnectParent('{D5994951-CD92-78B7-A059-3D423FCB599A}');
-
-        $this->RegisterPropertyString('VIN','');
-        $this->RegisterPropertyInteger('Interval', 60);
+        $this->ConnectParent('{72887112-E270-FFC1-04AC-817D82F42027}');
 
         $this->RegisterVariableBoolean('battery_heater_on', $this->Translate('Battery Heater On'), '~Switch');
         $this->RegisterVariableInteger('battery_level', $this->Translate('Battery Level'));
@@ -61,36 +58,27 @@ class TeslaVehicleCharging extends IPSModuleStrict
         $this->RegisterVariableBoolean('trip_charging', $this->Translate('Trip Charging'));
         $this->RegisterVariableInteger('usable_battery_level', $this->Translate('Usable Battery Level'));
         $this->RegisterVariableString('user_charge_enable_request', $this->Translate('User Charge Enable Request'));
-
-        $this->RegisterTimer('Tesla_UpdateCharging', 0, 'Tesla_FetchData($_IPS[\'TARGET\']);');
     }
 
-    public function Destroy() : void
-    {
-        $this->UnregisterTimer('Tesla_UpdateCharging');
-    }
-
-    public function ApplyChanges() : void
+    public function ApplyChanges(): void
     {
 
         //Never delete this line!
         parent::ApplyChanges();
-
-        $this->SetTimerInterval('Tesla_UpdateCharging', $this->ReadPropertyInteger('Interval') * 1000);
     }
 
     public function ReceiveData($JSONString): string
     {
         $response = json_decode($JSONString);
 
-        if ($response->response != null) {;
-        foreach ($response->response->charge_state as $key => $Value) {
-            if (@$this->GetIDForIdent($key) != false) {
-                $this->SetValue($key, $Value);
-            } else {
-                $this->SendDebug('Variable not exist', 'Key: ' . $key . ' - Value: ' . $Value, 0);
+        if ($response->response != null) {
+            foreach ($response->response->charge_state as $key => $Value) {
+                if (@$this->GetIDForIdent($key) != false) {
+                    $this->SetValue($key, $Value);
+                } else {
+                    $this->SendDebug('Variable not exist', 'Key: ' . $key . ' - Value: ' . $Value, 0);
+                }
             }
         }
-    }
     }
 }

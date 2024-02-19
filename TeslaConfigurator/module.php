@@ -52,9 +52,19 @@ class TeslaConfigurator extends IPSModuleStrict
                      'access_type'   => '',
                      'instanceID'    => $this->searchDevice('{2B8DD198-A8A8-C724-06F2-BF30C2FDCDA0}', $vehicle->vin),
                      'create'        => [
-                         'moduleID'      => '{2B8DD198-A8A8-C724-06F2-BF30C2FDCDA0}',
-                         'configuration' => new stdClass()
-                     ],
+                         [
+                             'moduleID'      => '{2B8DD198-A8A8-C724-06F2-BF30C2FDCDA0}',
+                             'configuration' => new stdClass()
+                         ],
+                         [
+                             'moduleID'      => '{72887112-E270-FFC1-04AC-817D82F42027}',
+                             'info'          => $vehicle->vin,
+                             'name'          => $vehicle->display_name,
+                             'configuration' => [
+                                 'VIN' => $vehicle->vin
+                             ]
+                         ]
+                     ]
                  ];
                 //Tesla Vehicle Charging
                 $data->actions[0]->values[] =
@@ -65,9 +75,19 @@ class TeslaConfigurator extends IPSModuleStrict
                      'access_type'   => '',
                      'instanceID'    => $this->searchDevice('{F1D8CB95-00E4-B426-D7A2-B6FDCFAAF364}', $vehicle->vin),
                      'create'        => [
-                         'moduleID'      => '{F1D8CB95-00E4-B426-D7A2-B6FDCFAAF364}',
-                         'configuration' => new stdClass()
-                     ],
+                         [
+                             'moduleID'      => '{F1D8CB95-00E4-B426-D7A2-B6FDCFAAF364}',
+                             'configuration' => new stdClass()
+                         ],
+                         [
+                             'moduleID'      => '{72887112-E270-FFC1-04AC-817D82F42027}',
+                             'info'          => $vehicle->vin,
+                             'name'          => $vehicle->display_name,
+                             'configuration' => [
+                                 'VIN' => $vehicle->vin
+                             ]
+                         ]
+                     ]
                  ];
                 //Tesla Vehicle Climate
                 $data->actions[0]->values[] =
@@ -78,9 +98,19 @@ class TeslaConfigurator extends IPSModuleStrict
                     'access_type'   => '',
                     'instanceID'    => $this->searchDevice('{25101D5C-0935-7306-FBB6-E43AB4D91562}', $vehicle->vin),
                     'create'        => [
-                        'moduleID'      => '{25101D5C-0935-7306-FBB6-E43AB4D91562}',
-                        'configuration' => new stdClass()
-                    ],
+                        [
+                            'moduleID'      => '{25101D5C-0935-7306-FBB6-E43AB4D91562}',
+                            'configuration' => new stdClass()
+                        ],
+                        [
+                            'moduleID'      => '{72887112-E270-FFC1-04AC-817D82F42027}',
+                            'info'          => $vehicle->vin,
+                            'name'          => $vehicle->display_name,
+                            'configuration' => [
+                                'VIN' => $vehicle->vin
+                            ]
+                        ]
+                    ]
                 ];
                 //Tesla Vehicle Config
                 $data->actions[0]->values[] =
@@ -91,9 +121,19 @@ class TeslaConfigurator extends IPSModuleStrict
                     'access_type'   => '',
                     'instanceID'    => $this->searchDevice('{57AE4590-8CEA-95D6-62EB-36A4B5833368}', $vehicle->vin),
                     'create'        => [
-                        'moduleID'      => '{57AE4590-8CEA-95D6-62EB-36A4B5833368}',
-                        'configuration' => new stdClass()
-                    ],
+                        [
+                            'moduleID'      => '{57AE4590-8CEA-95D6-62EB-36A4B5833368}',
+                            'configuration' => new stdClass()
+                        ],
+                        [
+                            'moduleID'      => '{72887112-E270-FFC1-04AC-817D82F42027}',
+                            'info'          => $vehicle->vin,
+                            'name'          => $vehicle->display_name,
+                            'configuration' => [
+                                'VIN' => $vehicle->vin
+                            ]
+                        ]
+                    ]
                 ];
                 //Tesla Vehicle Control
                 $data->actions[0]->values[] =
@@ -104,9 +144,19 @@ class TeslaConfigurator extends IPSModuleStrict
                     'access_type'   => '',
                     'instanceID'    => $this->searchDevice('{27C492E7-82B0-5E0C-3544-E96C0904480D}', $vehicle->vin),
                     'create'        => [
-                        'moduleID'      => '{27C492E7-82B0-5E0C-3544-E96C0904480D}',
-                        'configuration' => new stdClass()
-                    ],
+                        [
+                            'moduleID'      => '{27C492E7-82B0-5E0C-3544-E96C0904480D}',
+                            'configuration' => new stdClass()
+                        ],
+                        [
+                            'moduleID'      => '{72887112-E270-FFC1-04AC-817D82F42027}',
+                            'info'          => $vehicle->vin,
+                            'name'          => $vehicle->display_name,
+                            'configuration' => [
+                                'VIN' => $vehicle->vin
+                            ]
+                        ]
+                    ]
                 ];
                 //Tesla Vehicle Drive
                 $data->actions[0]->values[] =
@@ -117,9 +167,19 @@ class TeslaConfigurator extends IPSModuleStrict
                     'access_type'   => '',
                     'instanceID'    => $this->searchDevice('{83675CDD-3E50-FB21-8AE6-B4FC718A77B6}', $vehicle->vin),
                     'create'        => [
-                        'moduleID'      => '{83675CDD-3E50-FB21-8AE6-B4FC718A77B6}',
-                        'configuration' => new stdClass()
-                    ],
+                        [
+                            'moduleID'      => '{83675CDD-3E50-FB21-8AE6-B4FC718A77B6}',
+                            'configuration' => new stdClass()
+                        ],
+                        [
+                            'moduleID'      => '{72887112-E270-FFC1-04AC-817D82F42027}',
+                            'info'          => $vehicle->vin,
+                            'name'          => $vehicle->display_name,
+                            'configuration' => [
+                                'VIN' => $vehicle->vin
+                            ]
+                        ]
+                    ]
                 ];
                 //Tesla Vehicle GUI Settings
                 $data->actions[0]->values[] =
@@ -129,17 +189,20 @@ class TeslaConfigurator extends IPSModuleStrict
                     'display_name'  => 'Tesla Vehicle GUI Settings',
                     'access_type'   => '',
                     'instanceID'    => $this->searchDevice('{EF9CE1A3-AF7B-F488-698A-A1C49C798CBF}', $vehicle->vin),
-                    'create'        => [[
-                        'moduleID'      => '{EF9CE1A3-AF7B-F488-698A-A1C49C798CBF}',
-                        'configuration' => new stdClass()
-                    ],
-                    [
-                        'moduleID'      => '{72887112-E270-FFC1-04AC-817D82F42027}',
-                        'info'          => $vehicle->vin,
-                        'configuration' => [
-                            'VIN' => $vehicle->vin
+                    'create'        => [
+                        [
+                            'moduleID'      => '{EF9CE1A3-AF7B-F488-698A-A1C49C798CBF}',
+                            'configuration' => new stdClass()
+                        ],
+                        [
+                            'moduleID'      => '{72887112-E270-FFC1-04AC-817D82F42027}',
+                            'info'          => $vehicle->vin,
+                            'name'          => $vehicle->display_name,
+                            'configuration' => [
+                                'VIN' => $vehicle->vin
+                            ]
                         ]
-                    ]]
+                    ]
                 ];
             }
         }

@@ -1,12 +1,6 @@
 {
-    "elements": [
-    ],
+    "elements": [],
     "actions": [
-        {
-            "type": "Button",
-            "caption": "Update Data",
-            "onClick": "Tesla_FetchData($id);"
-        },
         {
             "type": "Label",
             "caption": "Spenden / Schenkung"

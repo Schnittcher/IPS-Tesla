@@ -1,26 +1,7 @@
 {
-    "elements": [
-        {
-            "type": "ValidationTextBox",
-            "name": "VIN",
-            "caption": "VIN"
-        },
-        {
-            "type": "Label",
-            "label": "Update Interval"
-        },
-        {
-            "type": "IntervalBox",
-            "name": "Interval",
-            "caption": "seconds"
-        }
-    ],
+    "elements": [],
     "actions": [
-        {
-            "type": "Button",
-            "caption": "Update Data",
-            "onClick": "Tesla_FetchData($id);"
-        },
+
         {
             "type": "Label",
             "caption": "Spenden / Schenkung"
