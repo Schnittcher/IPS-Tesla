@@ -9,7 +9,7 @@ class TeslaVehicleClimate extends IPSModuleStrict
     use TeslaHelper;
     use VariableProfileHelper;
 
-    public function Create() : void
+    public function Create(): void
     {
         //Never delete this line!
         parent::Create();
@@ -49,8 +49,7 @@ class TeslaVehicleClimate extends IPSModuleStrict
         $this->RegisterVariableBoolean('wiper_blade_heater', $this->Translate('Wiper Blade Heater'));
     }
 
-
-    public function ApplyChanges() : void
+    public function ApplyChanges(): void
     {
 
         //Never delete this line!
@@ -62,13 +61,14 @@ class TeslaVehicleClimate extends IPSModuleStrict
         $response = json_decode($JSONString);
 
         if ($response->response != null) {
-        foreach ($response->response->climate_state as $key => $Value) {
-            if (@$this->GetIDForIdent($key) != false) {
-                $this->SetValue($key, $Value);
-            } else {
-                $this->SendDebug('Variable not exist', 'Key: ' . $key . ' - Value: ' . $Value, 0);
+            foreach ($response->response->climate_state as $key => $Value) {
+                if (@$this->GetIDForIdent($key) != false) {
+                    $this->SetValue($key, $Value);
+                } else {
+                    $this->SendDebug('Variable not exist', 'Key: ' . $key . ' - Value: ' . $Value, 0);
+                }
             }
         }
-    }
+        return '';
     }
 }

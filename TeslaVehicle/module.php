@@ -9,7 +9,7 @@ class TeslaVehicle extends IPSModuleStrict
     use TeslaHelper;
     use VariableProfileHelper;
 
-    public function Create() : void
+    public function Create(): void
     {
         //Never delete this line!
         parent::Create();
@@ -62,9 +62,10 @@ class TeslaVehicle extends IPSModuleStrict
         $this->RegisterVariableFloat('tpms_pressure_fl', $this->Translate('Front left tire pressure'));
         $this->RegisterVariableFloat('tpms_pressure_fr', $this->Translate('Front right tire pressure'));
         $this->RegisterVariableFloat('tpms_pressure_rl', $this->Translate('Rear left tire pressure'));
-        $this->RegisterVariableFloat('tpms_pressure_rr', $this->Translate('Rear right tire pressure'));    }
+        $this->RegisterVariableFloat('tpms_pressure_rr', $this->Translate('Rear right tire pressure'));
+    }
 
-    public function ApplyChanges() : void
+    public function ApplyChanges(): void
     {
 
         //Never delete this line!
@@ -76,8 +77,8 @@ class TeslaVehicle extends IPSModuleStrict
         $response = json_decode($JSONString);
 
         if ($response->response != null) {
-        foreach ($response->response->vehicle_state as $key => $Value) {
-            switch ($key) {
+            foreach ($response->response->vehicle_state as $key => $Value) {
+                switch ($key) {
                 case 'speed_limit_mode':
                     $SpeedLimitMode = $Value;
                     foreach ($SpeedLimitMode as $SpeedLimitKey => $SpeedLimitValue) {
@@ -120,7 +121,8 @@ class TeslaVehicle extends IPSModuleStrict
                         }
                     break;
             }
+            }
         }
-    }
+        return '';
     }
 }

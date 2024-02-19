@@ -43,5 +43,6 @@ class TeslaVehicleGUISettings extends IPSModuleStrict
                 }
             }
         }
+        return '';
     }
 }

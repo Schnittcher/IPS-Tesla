@@ -66,5 +66,6 @@ class TeslaVehicleDrive extends IPSModuleStrict
                 }
             }
         }
+        return '';
     }
 }
