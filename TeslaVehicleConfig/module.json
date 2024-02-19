@@ -3,7 +3,9 @@
     "name": "TeslaVehicleConfig",
     "type": 3,
     "vendor": "Tesla",
-    "aliases": ["Tesla Vehicle Config"],
+    "aliases": [
+        "Tesla Vehicle Config"
+    ],
     "parentRequirements": [
         "{675AD8E8-253B-71E3-7304-6C8D9CDCD50B}"
     ],

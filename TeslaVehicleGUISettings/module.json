@@ -3,7 +3,9 @@
     "name": "TeslaVehicleGUISettings",
     "type": 3,
     "vendor": "Tesla",
-    "aliases": ["Tesla Vehicle GUI Settings"],
+    "aliases": [
+        "Tesla Vehicle GUI Settings"
+    ],
     "parentRequirements": [
         "{675AD8E8-253B-71E3-7304-6C8D9CDCD50B}"
     ],
