@@ -8,7 +8,7 @@ trait TeslaHelper
     {
         return $response = json_decode($this->SendDataToParent(json_encode([
             'DataID'   => '{83D77BA9-04CB-17F2-A0F9-43293FE8448C}',
-            'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN'),
+            'Endpoint' => '/api/1/vehicles/%VIN%',
             'Payload'  => ''
         ])))->response->state;
     }
