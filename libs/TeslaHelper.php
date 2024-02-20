@@ -7,7 +7,7 @@ trait TeslaHelper
     protected function isOnline()
     {
         return $response = json_decode($this->SendDataToParent(json_encode([
-            'DataID'   => '{FB4ED52F-A162-6F23-E7EA-2CBAAF48E662}',
+            'DataID'   => '{83D77BA9-04CB-17F2-A0F9-43293FE8448C}',
             'Endpoint' => '/api/1/vehicles/' . $this->ReadPropertyString('VIN'),
             'Payload'  => ''
         ])))->response->state;
