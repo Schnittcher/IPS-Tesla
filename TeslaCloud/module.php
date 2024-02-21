@@ -198,6 +198,10 @@ class TeslaCloud extends IPSModuleStrict
                 $this->SendDebug('State', 'Standby', 0);
                 return $result;
             }
+            if ((strpos($http_response_header[0], '500') > 0)) {
+                $this->SendDebug('State', 'Standby', 0);
+                return $result;
+            }
             echo $http_response_header[0] . PHP_EOL . $result;
             return $result;
         }
