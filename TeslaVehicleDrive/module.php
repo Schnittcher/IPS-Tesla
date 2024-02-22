@@ -14,7 +14,7 @@ class TeslaVehicleDrive extends IPSModuleStrict
         //Never delete this line!
         parent::Create();
 
-        $this->ConnectParent('{D5994951-CD92-78B7-A059-3D423FCB599A}');
+        $this->ConnectParent('{72887112-E270-FFC1-04AC-817D82F42027}');
 
         $this->RegisterPropertyString('VIN', '');
         $this->RegisterPropertyInteger('Interval', 60);
