@@ -91,20 +91,22 @@ class TeslaVehicleControl extends IPSModuleStrict
         parent::ApplyChanges();
     }
 
-    public function State(): bool
+    public function State(): string
     {
         $state = $this->isOnline();
         switch ($state) {
             case 'online':
                 $this->SetValue('State', true);
-                return true;
+                return $state;
                 break;
             case 'asleep':
                 $this->SetValue('State', false);
-                return false;
+                return $state;
                 break;
             default:
                 $this->SendDebug(__FUNCTION__, $state, 0);
+                $ths->LogMessage($state, KL_WARNING);
+                return $state;
                 break;
         }
     }
