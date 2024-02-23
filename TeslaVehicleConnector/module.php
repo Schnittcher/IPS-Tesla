@@ -43,6 +43,7 @@ class TeslaVehicleConnector extends IPSModuleStrict
             'Payload'  => ''
         ])));
 
+        $this->SendDebug('Response', json_encode($response), 0);
         $response->DataID = '{9825E0F7-B5DF-6ED8-4F73-5C7366FBB11F}';
         $this->SendDataToChildren(json_encode($response));
     }
