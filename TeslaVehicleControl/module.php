@@ -105,7 +105,7 @@ class TeslaVehicleControl extends IPSModuleStrict
                 break;
             default:
                 $this->SendDebug(__FUNCTION__, $state, 0);
-                $ths->LogMessage($state, KL_WARNING);
+                $this->LogMessage($state, KL_WARNING);
                 return $state;
                 break;
         }
