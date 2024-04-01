@@ -44,6 +44,11 @@ class TeslaVehicle extends IPSModuleStrict
         $this->RegisterVariableBoolean('sentry_mode', $this->Translate('Sentry Mode'));
         $this->RegisterVariableInteger('software_update_expected_duration_sec', $this->Translate('Software Update Expected Duration Sec'));
         $this->RegisterVariableString('software_update_status', $this->Translate('Software Update Status'));
+        
+        $this->RegisterVariableInteger('fd_window', $this->Translate('FD Window'));
+        $this->RegisterVariableInteger('fp_window', $this->Translate('FP Window'));
+        $this->RegisterVariableInteger('rd_window', $this->Translate('RD Window'));
+        $this->RegisterVariableInteger('rp_window', $this->Translate('RP Window'));
 
         //Speed Limit JSON
         $this->RegisterVariableBoolean('speed_limit_mode_active', $this->Translate('Speed Limit Mode Active'));
