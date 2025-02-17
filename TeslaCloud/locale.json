@@ -4,7 +4,12 @@
             "Register": "Registrieren",
             "Token": "Token",
             "Token: Not registered yet": "Token: Noch nicht registriert",
-            "https://www.symcon.de/en/service/documentation/module-reference/tesla/": "https://www.symcon.de/de/service/dokumentation/modulreferenz/tesla/"
+            "To use this module you need an account on https://developer.tesla.com!": "Um dieses Modul zu nutzen benötigt Ihr einen Account auf https://developer.tesla.com!",
+            "https://www.symcon.de/en/service/documentation/module-reference/tesla/": "https://www.symcon.de/de/service/dokumentation/modulreferenz/tesla/",
+            "Please register a new app with Tesla to get a ClientID/ClientSecret!": "Bitte registrieren Sie eine neue Anwendung bei Tesla, um eine ClientID/ClientSecret zu erhalten!",
+            "Register ipmagic.de as a valid domain for your developer account!": "ipmagic.de muss als gültige Domain zum eigenen Entwickler Account hinzugefügt werden!",
+            "Register ipmagic.de to your account": "ipmagic.de im Account registrieren",
+            "Generating private key...": "Generiere privaten Schlüssel..."
         }
     }
 }

@@ -1,6 +1,22 @@
 {
     "elements": [
         {
+            "type": "Label",
+            "caption": ""
+        },
+        {
+            "type": "ValidationTextBox",
+            "name": "ClientID",
+            "caption": "ClientID"
+        },
+        {
+            "type": "PasswordTextBox",
+            "name": "ClientSecret",
+            "caption": "ClientSecret"
+        }
+    ],
+    "actions": [
+        {
             "type": "Button",
             "label": "Register",
             "onClick": "echo TESLA_Register($id);"
@@ -8,9 +24,38 @@
         {
             "type": "Label",
             "name": "Token"
-        }
-    ],
-    "actions": [
+        },
+        {
+            "type": "Label",
+            "caption": ""
+        },
+        {
+            "type": "Label",
+            "caption": "Register ipmagic.de as a valid domain for your developer account!"
+        },
+        {
+            "type": "Button",
+            "label": "Register ipmagic.de to your account",
+            "onClick": "echo TESLA_RegisterDomain($id);"
+        },
+        {
+            "type": "PopupAlert",
+            "name": "KeyGenerationProgress",
+            "popup": {
+                "items": [
+                    {
+                        "type": "ProgressBar",
+                        "caption": "Generating private key...",
+                        "indeterminate": true
+                    }
+                ]
+            },
+            "visible": false
+        },
+        {
+            "type": "Label",
+            "name": ""
+        },
         {
             "type": "Label",
             "caption": "Spenden / Schenkung"
