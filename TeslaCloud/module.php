@@ -76,7 +76,7 @@ class TeslaCloud extends IPSModuleStrict
     {
         if (!$this->ReadPropertyString("ClientID") || !$this->ReadPropertyString("ClientSecret")) {
             echo $this->Translate('Please register a new app with Tesla to get a ClientID/ClientSecret!');
-            return "";
+            return;
         }
 
         $specialFolder = IPS_GetKernelDir() . '.well-known/appspecific';
