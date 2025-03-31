@@ -36,13 +36,16 @@ class TeslaCloud extends IPSModuleStrict
     public function ForwardData(string $data): string
     {
         $data = json_decode($data);
+        $result = "";
         if (strlen($data->Payload) > 0) {
             $this->SendDebug('ForwardData', $data->Endpoint . ', Payload: ' . $data->Payload, 0);
-            return $this->PostData($this->MakeURL($data->Endpoint), $data->Payload);
+            $result = $this->PostData($this->MakeURL($data->Endpoint), $data->Payload);
         } else {
             $this->SendDebug('ForwardData', $data->Endpoint, 0);
-            return $this->GetData($this->MakeURL($data->Endpoint));
+            $result = $this->GetData($this->MakeURL($data->Endpoint));
         }
+        $this->SendDebug('Result', $result, 0);
+        return $result;
     }
 
     public function GetConfigurationForm(): string
@@ -201,7 +204,7 @@ class TeslaCloud extends IPSModuleStrict
 
     private function MakeURL($endpoint)
     {
-        return 'https://oauth.ipmagic.de/proxy/tesla' . $endpoint;
+        return 'https://fleet-api.prd.eu.vn.cloud.tesla.com/' . $endpoint;
     }
 
     private function FetchRefreshToken($code): string
